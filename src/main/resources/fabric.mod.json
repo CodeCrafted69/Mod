@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "chunkedit",
+  "version": "${version}",
+  "name": "Chunk Edit",
+  "description": "Commands to replace or fill blocks within the chunk you are standing in.",
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.example.chunkedit.ChunkEdit"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.1",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
