@@ -59,7 +59,8 @@ public class ChunkEdit implements ModInitializer {
         CommandSourceStack source = ctx.getSource();
         ServerPlayer player = source.getPlayerOrException();
         ServerLevel level = source.getLevel();
-        ChunkPos chunk = new ChunkPos(player.blockPosition());
+        BlockPos playerPos = player.blockPosition();
+        ChunkPos chunk = new ChunkPos(playerPos.getX() >> 4, playerPos.getZ() >> 4);
 
         Map<Block, Integer> counts = new HashMap<>();
         int total = 0;
@@ -83,7 +84,7 @@ public class ChunkEdit implements ModInitializer {
 
         int finalTotal = total;
         source.sendSuccess(() -> Component.literal(
-            "Scanned chunk [" + chunk.x + ", " + chunk.z + "]: " + finalTotal + " blocks, "
+            "Scanned chunk [" + chunk.x() + ", " + chunk.z() + "]: " + finalTotal + " blocks, "
                 + sorted.size() + " types. Top blocks:"), false);
         for (int i = 0; i < Math.min(10, sorted.size()); i++) {
             Map.Entry<Block, Integer> e = sorted.get(i);
@@ -149,7 +150,7 @@ public class ChunkEdit implements ModInitializer {
 
         int finalChanged = changed;
         source.sendSuccess(() -> Component.literal(
-            verb + " " + finalChanged + " blocks in chunk [" + chunk.x + ", " + chunk.z + "]."), true);
+            verb + " " + finalChanged + " blocks in chunk [" + chunk.x() + ", " + chunk.z() + "]."), true);
         return changed;
     }
 }
